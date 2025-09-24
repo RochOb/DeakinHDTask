@@ -18,12 +18,23 @@ RUN npm run build
 
 # ===== final runtime =====
 FROM node:20-bookworm-slim
+
+# Install **production** server dependencies
+WORKDIR /server
+COPY --from=srv /srv/package.json ./package.json
+# copy lockfile too if you have one; harmless if not present
+COPY --from=srv /srv/package-lock.json ./package-lock.json
+# Use npm ci when lock exists, otherwise npm install
+RUN if [ -f package-lock.json ]; then npm ci --omit=dev; else npm install --omit=dev; fi
+
+# Copy built server JS
+COPY --from=srv /srv/dist ./dist
+
+# Copy built UI
 WORKDIR /
-# Bring in the *server* build that contains your notify route
-COPY --from=srv /srv/dist /server/dist
-# Bring in the built UI assets
-COPY --from=ui  /app/dist /app_build
+COPY --from=ui /app/dist /app_build
+
 ENV NODE_ENV=production
 EXPOSE 8080
-# Start the correct server entry (has /_internal/notify)
+# Start the correct server build (has /_internal/notify)
 CMD ["node", "/server/dist/index.js"]
