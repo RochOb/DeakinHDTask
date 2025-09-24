@@ -10,3 +10,4 @@ artifacts/
 app/dist/
 server/dist/
 
+server/src/*.js
