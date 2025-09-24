@@ -8,9 +8,11 @@
     "test": "node -e \"console.log('server tests TBD')\""
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.21.2"
   },
   "devDependencies": {
-    "typescript": "^5.5.4"
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2"
   }
 }

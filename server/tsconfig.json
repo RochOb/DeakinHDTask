@@ -6,6 +6,11 @@
     "rootDir": "src",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "strict": true
-  }
+    "strict": true,
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "skipLibCheck": true
+  },
+  "include": ["src"]
 }
+
