@@ -3,7 +3,7 @@ echo "== Stage: Docker build/deploy =="
 HOST_PORT=${HOST_PORT:-8081}
 IMAGE="discountmate:${BUILD_NUMBER:-local}"
 
-# Remove any old container named discountmate (safe)
+
 docker rm -f discountmate >/dev/null 2>&1 || true
 
 # Build image (assumes Dockerfile at repo root)

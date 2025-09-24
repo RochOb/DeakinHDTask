@@ -13,7 +13,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended'
   ],
   rules: {
-    // you can relax rules here if the linter is too strict
+    
     'no-console': 'off'
   }
 };
