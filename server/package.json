@@ -1,0 +1,16 @@
+{
+  "name": "discountmate-server",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc -p .",
+    "test": "node -e \"console.log('server tests TBD')\""
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
