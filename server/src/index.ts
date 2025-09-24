@@ -19,7 +19,7 @@ app.get("/healthz", (_req, res) =>
   res.json({ ok: true, service: "discountmate", ts: Date.now() })
 );
 
-
+// Notify route (secured by NOTIFY_TOKEN)
 app.post("/_internal/notify", async (req, res) => {
   const token = req.header("x-api-key") || "";
   if (!NOTIFY_TOKEN || token !== NOTIFY_TOKEN) {
@@ -36,12 +36,12 @@ app.post("/_internal/notify", async (req, res) => {
   try {
     const info = await sendEmail({ to, subject, text, html });
     return res.json({ ok: true, info });
-  } catch (err: any) {
-    console.error("sendEmail error:", err);
-    return res.status(500).json({ ok: false, error: err?.message || String(err) });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("sendEmail error:", msg);
+    return res.status(500).json({ ok: false, error: msg });
   }
 });
-
 
 const staticDir = path.join(__dirname, "../../app_build");
 app.use(express.static(staticDir));
