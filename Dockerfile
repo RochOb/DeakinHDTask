@@ -22,9 +22,9 @@ FROM node:20-bookworm-slim
 # Install **production** server dependencies
 WORKDIR /server
 COPY --from=srv /srv/package.json ./package.json
-# copy lockfile too if you have one; harmless if not present
+
 COPY --from=srv /srv/package-lock.json ./package-lock.json
-# Use npm ci when lock exists, otherwise npm install
+
 RUN if [ -f package-lock.json ]; then npm ci --omit=dev; else npm install --omit=dev; fi
 
 # Copy built server JS
